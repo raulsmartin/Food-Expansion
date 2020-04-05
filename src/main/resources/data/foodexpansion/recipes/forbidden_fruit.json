@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ggg",
+    "gDg",
+    "ggg"
+  ],
+  "key": {
+    "g": {
+      "item": "minecraft:golden_apple",
+      "data": "0"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "foodexpansion:forbidden_fruit"
+  },
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableForbiddenFruit"
+    }
+  ]
+}

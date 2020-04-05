@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:mushrooms"
+  },
+  "result": "foodexpansion:cooked_mushroom",
+  "experience": 0.35,
+  "cookingtime": 200,
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeCookedMushroom"
+    }
+  ]
+}

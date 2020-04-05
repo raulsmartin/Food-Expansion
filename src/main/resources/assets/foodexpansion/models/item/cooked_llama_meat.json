@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "foodexpansion:item/cooked_llama_meat"
+  }
+}

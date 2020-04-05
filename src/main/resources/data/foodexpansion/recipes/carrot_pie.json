@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "foodexpansion:carrot_pie"
+  },
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeCarrotPie"
+    }
+  ]
+}

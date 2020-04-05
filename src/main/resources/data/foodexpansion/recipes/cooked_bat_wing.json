@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "foodexpansion:bat_wing"
+  },
+  "result": "foodexpansion:cooked_bat_wing",
+  "experience": 0.35,
+  "cookingtime": 200,
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeCookedBatWing"
+    }
+  ]
+}

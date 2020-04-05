@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "foodexpansion:bacon"
+    },
+    {
+      "item": "foodexpansion:fried_egg"
+    }
+  ],
+  "result": {
+    "item": "foodexpansion:bacon_and_egg"
+  },
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeBaconAndEgg"
+    }
+  ]
+}

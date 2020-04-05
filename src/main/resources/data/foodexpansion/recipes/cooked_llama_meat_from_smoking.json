@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "foodexpansion:llama_meat"
+  },
+  "result": "foodexpansion:cooked_llama_meat",
+  "experience": 0.35,
+  "cookingtime": 100,
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeCookedLlamaMeat"
+    }
+  ]
+}

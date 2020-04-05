@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "fff",
+    "fDf",
+    "fff"
+  ],
+  "key": {
+    "f": {
+      "item": "minecraft:rotten_flesh"
+    },
+    "D": {
+      "item": "minecraft:diamond_block"
+    }
+  },
+  "result": {
+    "item": "foodexpansion:starving_fruit"
+  },
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableStarvingFruit"
+    }
+  ]
+}

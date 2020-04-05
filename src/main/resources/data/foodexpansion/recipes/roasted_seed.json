@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "tag": "forge:seeds"
+  },
+  "result": "foodexpansion:roasted_seed",
+  "experience": 0.35,
+  "cookingtime": 200,
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRoastedSeed"
+    }
+  ]
+}

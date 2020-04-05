@@ -1,0 +1,20 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+[[mods]]
+modId="foodexpansion"
+version="${file.jarVersion}"
+displayName="Food Expansion: Reimagined"
+authors="raulsmartin & Lellson"
+description="Adds various food into the game"
+[[dependencies.foodexpansion]]
+    modId="forge"
+    mandatory=true
+    versionRange="[28,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.foodexpansion]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"
