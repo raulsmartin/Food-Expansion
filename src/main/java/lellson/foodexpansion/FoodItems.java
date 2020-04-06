@@ -102,10 +102,8 @@ public class FoodItems {
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
             if (item != null) {
                 try {
-                    Field field = ObfuscationReflectionHelper.findField(Item.class, "field_200920_a");
-                    field.setAccessible(true);
-                    field.set(item, 64);
-                } catch (IllegalAccessException e) {
+                    ObfuscationReflectionHelper.findField(Item.class, "field_200920_a").set(item, 64);
+                } catch (Exception e) {
                     LogManager.getLogger(Reference.MODID).warn("Food Expansion: Couldn't increase stack size. Details: " + e.getMessage());
                 }
             } else {
