@@ -168,7 +168,7 @@ public class FoodExpansion {
             if (!cfgDisable) {
                 int count = entity.world.rand.nextInt(maxDropAmount);
                 if (count > 0) {
-                    return new ItemEntity(entity.world, entity.posX, entity.posY + 0.5D, entity.posZ, new ItemStack(entity.isBurning() ? cooked : uncooked, count));
+                    return new ItemEntity(entity.world, entity.func_226277_ct_(), entity.func_226278_cu_() + 0.5D, entity.func_226281_cx_(), new ItemStack(entity.isBurning() ? cooked : uncooked, count));
                 }
             }
             return null;
