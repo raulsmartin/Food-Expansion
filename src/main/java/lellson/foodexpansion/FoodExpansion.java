@@ -13,6 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.storage.loot.*;
@@ -102,7 +103,7 @@ public class FoodExpansion {
         }
 
         @SubscribeEvent
-        public static void registerRecipeSerialziers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        public static void registerRecipeSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
             CraftingHelper.register(ConfigEnabledCondition.Serializer.INSTANCE);
         }
     }
@@ -127,14 +128,19 @@ public class FoodExpansion {
 
         @SubscribeEvent
         public static void onLivingEntityUseItem(LivingEntityUseItemEvent.Finish event) {
-            if (event.getEntity() instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) event.getEntity();
+            if (event.getEntityLiving() instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
                 if (isBowl(event.getItem().getItem())) {
-                    player.inventory.addItemStackToInventory(event.getResultStack().copy());
+                    ItemStack result = event.getResultStack().copy();
                     ItemStack itemStack = event.getItem().copy();
                     itemStack.setCount(itemStack.getCount() - 1);
                     event.setResultStack(itemStack);
+                    if (itemStack.isEmpty()) {
+                        event.setResultStack(result);
+                    } else if (!player.inventory.addItemStackToInventory(result.copy())) {
+                        player.dropItem(result, false);
+                    }
                 }
             }
         }
@@ -168,7 +174,7 @@ public class FoodExpansion {
             if (!cfgDisable) {
                 int count = entity.world.rand.nextInt(maxDropAmount);
                 if (count > 0) {
-                    return new ItemEntity(entity.world, entity.func_226277_ct_(), entity.func_226278_cu_() + 0.5D, entity.func_226281_cx_(), new ItemStack(entity.isBurning() ? cooked : uncooked, count));
+                    return new ItemEntity(entity.world, entity.getPosX(), entity.getPosY() + 0.5D, entity.getPosZ(), new ItemStack(entity.isBurning() ? cooked : uncooked, count));
                 }
             }
             return null;
