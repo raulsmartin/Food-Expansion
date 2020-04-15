@@ -102,7 +102,7 @@ public class FoodExpansion {
         }
 
         @SubscribeEvent
-        public static void registerRecipeSerialziers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
+        public static void registerRecipeSerializers(final RegistryEvent.Register<IRecipeSerializer<?>> event) {
             CraftingHelper.register(ConfigEnabledCondition.Serializer.INSTANCE);
         }
     }
@@ -127,14 +127,19 @@ public class FoodExpansion {
 
         @SubscribeEvent
         public static void onLivingEntityUseItem(LivingEntityUseItemEvent.Finish event) {
-            if (event.getEntity() instanceof PlayerEntity) {
-                PlayerEntity player = (PlayerEntity) event.getEntity();
+            if (event.getEntityLiving() instanceof PlayerEntity) {
+                PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
                 if (isBowl(event.getItem().getItem())) {
-                    player.inventory.addItemStackToInventory(event.getResultStack().copy());
+                    ItemStack result = event.getResultStack().copy();
                     ItemStack itemStack = event.getItem().copy();
                     itemStack.setCount(itemStack.getCount() - 1);
                     event.setResultStack(itemStack);
+                    if (itemStack.isEmpty()) {
+                        event.setResultStack(result);
+                    } else if (!player.inventory.addItemStackToInventory(result.copy())) {
+                        player.dropItem(result, false);
+                    }
                 }
             }
         }
