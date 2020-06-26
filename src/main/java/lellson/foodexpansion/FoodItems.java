@@ -6,12 +6,9 @@ import lellson.foodexpansion.items.LollipopItem;
 import lellson.foodexpansion.items.NetherWartSoupItem;
 import net.minecraft.item.*;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -101,11 +98,8 @@ public class FoodItems {
         for (String s : FoodExpansionConfig.bowlStackSizeItems) {
             Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(s));
             if (item != null) {
-                try {
-                    ObfuscationReflectionHelper.findField(Item.class, "field_200920_a").set(item, 64);
-                } catch (Exception e) {
-                    LogManager.getLogger(Reference.MODID).warn("Food Expansion: Couldn't increase stack size. Details: " + e.getMessage());
-                }
+                LogManager.getLogger(Reference.MODID).info("Food Expansion: Increasing stack of " + s + "...");
+                item.maxStackSize = 64;
             } else {
                 LogManager.getLogger(Reference.MODID).warn("Food Expansion: Couldn't increase stack size. " + s + " is not a valid item!");
             }

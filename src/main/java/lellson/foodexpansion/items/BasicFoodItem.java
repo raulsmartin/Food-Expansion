@@ -4,6 +4,7 @@ import lellson.foodexpansion.FoodExpansion;
 import lellson.foodexpansion.FoodItems;
 import lellson.foodexpansion.Reference;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -38,6 +39,11 @@ public class BasicFoodItem extends Item {
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
         ItemStack item = super.onItemUseFinish(stack, worldIn, entityLiving);
-        return isSoup ? new ItemStack(Items.BOWL) : item;
+        if (isSoup) {
+            if (!(entityLiving instanceof PlayerEntity) || !((PlayerEntity) entityLiving).abilities.isCreativeMode) {
+                return new ItemStack(Items.BOWL);
+            }
+        }
+        return item;
     }
 }
