@@ -64,13 +64,13 @@ public class FoodExpansion {
         FoodItems.increaseStackSizes();
 
         addDrop(FoodExpansionConfig.disableSquidDrop, SquidEntity.class, FoodItems.squid, FoodItems.cookedSquid, 2);
-        addDrop(FoodExpansionConfig.disableHorseMeatDrop, HorseEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3);
+        addDrop(FoodExpansionConfig.disableHorseMeatDrop, HorseEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3, true);
         addDrop(FoodExpansionConfig.disableBatWingDrop, BatEntity.class, FoodItems.batWing, FoodItems.cookedBatWing, 1);
-        addDrop(FoodExpansionConfig.disableWolfMeatDrop, WolfEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2);
-        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, OcelotEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1);
-        addDrop(FoodExpansionConfig.disableParrotMeatDrop, ParrotEntity.class, FoodItems.parrotMeat, FoodItems.cookedParrotMeat, 1);
-        addDrop(FoodExpansionConfig.disableLlamaMeatDrop, LlamaEntity.class, FoodItems.llamaMeat, FoodItems.cookedLlamaMeat, 2);
-        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PolarBearEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3);
+        addDrop(FoodExpansionConfig.disableWolfMeatDrop, WolfEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2, true);
+        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, OcelotEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1, true);
+        addDrop(FoodExpansionConfig.disableParrotMeatDrop, ParrotEntity.class, FoodItems.parrotMeat, FoodItems.cookedParrotMeat, 1, true);
+        addDrop(FoodExpansionConfig.disableLlamaMeatDrop, LlamaEntity.class, FoodItems.llamaMeat, FoodItems.cookedLlamaMeat, 2, true);
+        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PolarBearEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3, true);
     }
 
     private void onClientSetup(final FMLClientSetupEvent event) {
@@ -78,7 +78,11 @@ public class FoodExpansion {
     }
 
     private void addDrop(boolean cfgDisable, Class<?> entityClass, Item uncooked, Item cooked, int maxDropAmount) {
-        DROP_LIST.put(entityClass, new Drop(cfgDisable, uncooked, cooked, maxDropAmount));
+        addDrop(cfgDisable, entityClass, uncooked, cooked, maxDropAmount, false);
+    }
+
+    private void addDrop(boolean cfgDisable, Class<?> entityClass, Item uncooked, Item cooked, int maxDropAmount, boolean alwaysDrop) {
+        DROP_LIST.put(entityClass, new Drop(cfgDisable, uncooked, cooked, maxDropAmount, alwaysDrop));
     }
 
     @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -130,7 +134,7 @@ public class FoodExpansion {
             if (event.getEntityLiving() instanceof PlayerEntity) {
                 PlayerEntity player = (PlayerEntity) event.getEntityLiving();
 
-                if (isBowl(event.getItem().getItem())) {
+                if (isBowl(event.getItem().getItem()) && !player.isCreative()) {
                     ItemStack result = event.getResultStack().copy();
                     ItemStack itemStack = event.getItem().copy();
                     itemStack.setCount(itemStack.getCount() - 1);
@@ -158,20 +162,21 @@ public class FoodExpansion {
     }
 
     public static class Drop {
-        public boolean cfgDisable;
+        public boolean cfgDisable, alwaysDrop;
         public Item uncooked, cooked;
         public int maxDropAmount;
 
-        public Drop(boolean cfgDisable, Item uncooked, Item cooked, int maxDropAmount) {
+        public Drop(boolean cfgDisable, Item uncooked, Item cooked, int maxDropAmount, boolean alwaysDrop) {
             this.cfgDisable = cfgDisable;
             this.uncooked = uncooked;
             this.cooked = cooked;
             this.maxDropAmount = maxDropAmount;
+            this.alwaysDrop = alwaysDrop;
         }
 
         public ItemEntity getDrop(LivingEntity entity) {
             if (!cfgDisable) {
-                int count = entity.world.rand.nextInt(maxDropAmount);
+                int count = alwaysDrop ? entity.world.rand.nextInt(maxDropAmount) + 1 : entity.world.rand.nextInt(maxDropAmount + 1);
                 if (count > 0) {
                     return new ItemEntity(entity.world, entity.posX, entity.posY + 0.5D, entity.posZ, new ItemStack(entity.isBurning() ? cooked : uncooked, count));
                 }
