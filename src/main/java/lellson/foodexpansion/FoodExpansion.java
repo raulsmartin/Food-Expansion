@@ -8,6 +8,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.passive.horse.LlamaEntity;
+import net.minecraft.entity.passive.horse.MuleEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -55,12 +56,16 @@ public class FoodExpansion {
 
         addDrop(FoodExpansionConfig.disableSquidDrop, SquidEntity.class, FoodItems.squid, FoodItems.cookedSquid, 2);
         addDrop(FoodExpansionConfig.disableHorseMeatDrop, HorseEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3, true);
+        addDrop(FoodExpansionConfig.disableHorseMeatDrop, MuleEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3, true);
         addDrop(FoodExpansionConfig.disableBatWingDrop, BatEntity.class, FoodItems.batWing, FoodItems.cookedBatWing, 1);
         addDrop(FoodExpansionConfig.disableWolfMeatDrop, WolfEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2, true);
+        addDrop(FoodExpansionConfig.disableWolfMeatDrop, FoxEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2, true);
         addDrop(FoodExpansionConfig.disableOcelotMeatDrop, OcelotEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1, true);
+        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, CatEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1, true);
         addDrop(FoodExpansionConfig.disableParrotMeatDrop, ParrotEntity.class, FoodItems.parrotMeat, FoodItems.cookedParrotMeat, 1, true);
         addDrop(FoodExpansionConfig.disableLlamaMeatDrop, LlamaEntity.class, FoodItems.llamaMeat, FoodItems.cookedLlamaMeat, 2, true);
         addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PolarBearEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3, true);
+        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PandaEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3, true);
     }
 
     private void onClientSetup(final FMLClientSetupEvent event) {
