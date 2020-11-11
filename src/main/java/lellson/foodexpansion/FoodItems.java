@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.logging.log4j.LogManager;
 
 public class FoodItems {
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Reference.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Reference.MODID);
 
     public static final RegistryObject<Item> JELLY = ITEMS.register("jelly", () -> new BasicFoodItem(FoodTypes.JELLY));
     public static final RegistryObject<Item> BACON = ITEMS.register("bacon", () -> new BasicFoodItem(FoodTypes.BACON));
