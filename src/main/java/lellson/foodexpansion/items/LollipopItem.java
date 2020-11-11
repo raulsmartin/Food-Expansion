@@ -13,7 +13,7 @@ public class LollipopItem extends BasicFoodItem {
     private final Multimap<Attribute, AttributeModifier> attributeModifiers;
 
     public LollipopItem() {
-        super("lollipop", FoodTypes.LOLLIPOP);
+        super(FoodTypes.LOLLIPOP);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Weapon modifier", 2D, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Weapon modifier", -2.4000000953674316D, AttributeModifier.Operation.ADDITION));

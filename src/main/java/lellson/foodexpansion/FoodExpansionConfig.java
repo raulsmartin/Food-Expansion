@@ -42,5 +42,12 @@ public final class FoodExpansionConfig {
     public static boolean disableParrotMeatDrop;
     public static boolean disableLlamaMeatDrop;
     public static boolean disablePolarBearMeatDrop;
+
+    //NEW FOOD RECIPES
+    public static boolean disableRecipeVeggieStew;
+    public static boolean disableRecipeBatSoup;
+    public static boolean disableRecipeGoldenFeast;
+    public static boolean disableRecipeChocolateCake;
+
     public static List<String> bowlStackSizeItems;
 }

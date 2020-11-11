@@ -8,7 +8,7 @@ public class FoodTypes {
     public static final Food JELLY = (new Food.Builder()).hunger(4).saturation(0.6F).effect(new EffectInstance(Effects.NAUSEA, 200, 0), 1F).setAlwaysEdible().build();
     public static final Food BACON = (new Food.Builder()).hunger(1).saturation(0.2F).meat().fastToEat().build();
     public static final Food COOKED_BACON = (new Food.Builder()).hunger(4).saturation(0.4F).meat().fastToEat().build();
-    public static final Food FRIED_EGG = (new Food.Builder()).hunger(2).saturation(0.3F).build();
+    public static final Food FRIED_EGG = (new Food.Builder()).hunger(3).saturation(0.3F).build();
     public static final Food BACON_AND_EGG = (new Food.Builder()).hunger(7).saturation(0.8F).build();
     public static final Food CARROT_SEED_SOUP = (new Food.Builder()).hunger(8).saturation(0.8F).build();
     public static final Food SQUID = (new Food.Builder()).hunger(1).saturation(0.2F).build();
@@ -39,4 +39,10 @@ public class FoodTypes {
     public static final Food COOKED_LLAMA_MEAT = (new Food.Builder()).hunger(7).saturation(0.8F).meat().build();
     public static final Food POLAR_BEAR_MEAT = (new Food.Builder()).hunger(3).saturation(0.3F).meat().build();
     public static final Food COOKED_POLAR_BEAR_MEAT = (new Food.Builder()).hunger(8).saturation(0.8F).meat().build();
+
+    //NEW FOOD TYPES
+    public static final Food VEGGIE_STEW = (new Food.Builder()).hunger(10).saturation(1F).build();
+    public static final Food BAT_SOUP = (new Food.Builder()).hunger(6).saturation(0.6F).effect(new EffectInstance(Effects.NIGHT_VISION, 300, 0), 1F).setAlwaysEdible().build();
+    public static final Food GOLDEN_FEAST = (new Food.Builder()).hunger(14).saturation(1F).effect(new EffectInstance(Effects.SATURATION, 2400, 0), 1F).setAlwaysEdible().build();
+
 }

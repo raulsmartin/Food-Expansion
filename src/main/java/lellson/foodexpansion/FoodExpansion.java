@@ -8,8 +8,8 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.passive.*;
 import net.minecraft.entity.passive.horse.HorseEntity;
 import net.minecraft.entity.passive.horse.LlamaEntity;
-import net.minecraft.entity.passive.horse.MuleEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -22,6 +22,7 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -42,11 +43,13 @@ public class FoodExpansion {
     public FoodExpansion() {
         instance = this;
 
-        final ModLoadingContext modLoadingContext = ModLoadingContext.get();
-        modLoadingContext.registerConfig(ModConfig.Type.COMMON, ConfigHolder.COMMON_SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHolder.COMMON_SPEC);
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onClientSetup);
+
+        FoodBlocks.BLOCKS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        FoodItems.ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
 
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -54,18 +57,14 @@ public class FoodExpansion {
     private void onCommonSetup(final FMLCommonSetupEvent event) {
         FoodItems.increaseStackSizes();
 
-        addDrop(FoodExpansionConfig.disableSquidDrop, SquidEntity.class, FoodItems.squid, FoodItems.cookedSquid, 2);
-        addDrop(FoodExpansionConfig.disableHorseMeatDrop, HorseEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3, true);
-        addDrop(FoodExpansionConfig.disableHorseMeatDrop, MuleEntity.class, FoodItems.horseMeat, FoodItems.cookedHorseMeat, 3, true);
-        addDrop(FoodExpansionConfig.disableBatWingDrop, BatEntity.class, FoodItems.batWing, FoodItems.cookedBatWing, 1);
-        addDrop(FoodExpansionConfig.disableWolfMeatDrop, WolfEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2, true);
-        addDrop(FoodExpansionConfig.disableWolfMeatDrop, FoxEntity.class, FoodItems.wolfMeat, FoodItems.cookedWolfMeat, 2, true);
-        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, OcelotEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1, true);
-        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, CatEntity.class, FoodItems.ocelotMeat, FoodItems.cookedOcelotMeat, 1, true);
-        addDrop(FoodExpansionConfig.disableParrotMeatDrop, ParrotEntity.class, FoodItems.parrotMeat, FoodItems.cookedParrotMeat, 1, true);
-        addDrop(FoodExpansionConfig.disableLlamaMeatDrop, LlamaEntity.class, FoodItems.llamaMeat, FoodItems.cookedLlamaMeat, 2, true);
-        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PolarBearEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3, true);
-        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PandaEntity.class, FoodItems.polarBearMeat, FoodItems.cookedPolarBearMeat, 3, true);
+        addDrop(FoodExpansionConfig.disableSquidDrop, SquidEntity.class, FoodItems.SQUID.get(), FoodItems.COOKED_SQUID.get(), 2);
+        addDrop(FoodExpansionConfig.disableHorseMeatDrop, HorseEntity.class, FoodItems.HORSE_MEAT.get(), FoodItems.COOKED_HORSE_MEAT.get(), 3, true);
+        addDrop(FoodExpansionConfig.disableBatWingDrop, BatEntity.class, FoodItems.BAT_WING.get(), FoodItems.COOKED_BAT_WING.get(), 1);
+        addDrop(FoodExpansionConfig.disableWolfMeatDrop, WolfEntity.class, FoodItems.WOLF_MEAT.get(), FoodItems.COOKED_WOLF_MEAT.get(), 2, true);
+        addDrop(FoodExpansionConfig.disableOcelotMeatDrop, OcelotEntity.class, FoodItems.OCELOT_MEAT.get(), FoodItems.COOKED_OCELOT_MEAT.get(), 1, true);
+        addDrop(FoodExpansionConfig.disableParrotMeatDrop, ParrotEntity.class, FoodItems.PARROT_MEAT.get(), FoodItems.COOKED_PARROT_MEAT.get(), 1, true);
+        addDrop(FoodExpansionConfig.disableLlamaMeatDrop, LlamaEntity.class, FoodItems.LLAMA_MEAT.get(), FoodItems.COOKED_LLAMA_MEAT.get(), 2, true);
+        addDrop(FoodExpansionConfig.disablePolarBearMeatDrop, PolarBearEntity.class, FoodItems.POLAR_BEAR_MEAT.get(), FoodItems.COOKED_POLAR_BEAR_MEAT.get(), 3, true);
     }
 
     private void onClientSetup(final FMLClientSetupEvent event) {
@@ -93,11 +92,9 @@ public class FoodExpansion {
 
         @SubscribeEvent
         public static void registerItems(final RegistryEvent.Register<Item> event) {
-            FoodItems.init();
-
-            for (Item item : FoodItems.ITEM_LIST) {
-                event.getRegistry().register(item);
-            }
+            FoodBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> {
+                event.getRegistry().register(new BlockItem(block, new Item.Properties().group(ITEM_GROUP)).setRegistryName(block.getRegistryName()));
+            });
         }
 
         @SubscribeEvent

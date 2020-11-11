@@ -14,6 +14,6 @@ public class FoodExpansionItemGroup extends ItemGroup {
     @Nonnull
     @Override
     public ItemStack createIcon() {
-        return new ItemStack(FoodItems.chocolateBar);
+        return new ItemStack(FoodItems.BACON_AND_EGG.get());
     }
 }
