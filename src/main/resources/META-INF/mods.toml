@@ -1,20 +1,27 @@
 modLoader="javafml"
-loaderVersion="[32,)"
+loaderVersion="[34,)"
+issueTrackerURL="https://github.com/raulsmartin/Food-Expansion/issues"
+
 [[mods]]
-modId="foodexpansion"
-version="${file.jarVersion}"
-displayName="Food Expansion: Reimagined"
-authors="raulsmartin & Lellson"
-description="Adds various food into the game"
-[[dependencies.foodexpansion]]
-    modId="forge"
-    mandatory=true
-    versionRange="[32,)"
-    ordering="NONE"
-    side="BOTH"
-[[dependencies.foodexpansion]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.1]"
-    ordering="NONE"
-    side="BOTH"
+    modId="foodexpansion"
+    version="${file.jarVersion}"
+    displayName="Food Expansion: Reimagined"
+    displayURL="https://www.curseforge.com/minecraft/mc-mods/food-expansion-reimagined"
+    logoFile="logo.png"
+    credits="Thanks to Lellson for his original Food Expansion."
+    authors="raulsmartin & Simple Dimple"
+    description="Adds various food into the game"
+
+    [[dependencies.foodexpansion]]
+        modId="forge"
+        mandatory=true
+        versionRange="[34,)"
+        ordering="NONE"
+        side="BOTH"
+
+    [[dependencies.foodexpansion]]
+        modId="minecraft"
+        mandatory=true
+        versionRange="[1.16.3]"
+        ordering="NONE"
+        side="BOTH"
