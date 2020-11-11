@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "foodexpansion:bacon"
+      "item": "foodexpansion:cooked_bacon"
     },
     {
       "item": "foodexpansion:fried_egg"
