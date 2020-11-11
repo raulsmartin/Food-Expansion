@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class NetherWartSoupItem extends BasicFoodItem {
 
     public NetherWartSoupItem() {
-        super("nether_wart_soup", FoodTypes.NETHER_WART_SOUP, true);
+        super(FoodTypes.NETHER_WART_SOUP, true);
     }
 
     @Override

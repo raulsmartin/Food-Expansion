@@ -45,6 +45,13 @@ public final class ConfigHelper {
         FoodExpansionConfig.disableParrotMeatDrop = ConfigHolder.COMMON.disableParrotMeatDrop.get();
         FoodExpansionConfig.disableLlamaMeatDrop = ConfigHolder.COMMON.disableLlamaMeatDrop.get();
         FoodExpansionConfig.disablePolarBearMeatDrop = ConfigHolder.COMMON.disablePolarBearMeatDrop.get();
+
+        //NEW FOOD RECIPES
+        FoodExpansionConfig.disableRecipeVeggieStew = ConfigHolder.COMMON.disableRecipeVeggieStew.get();
+        FoodExpansionConfig.disableRecipeBatSoup = ConfigHolder.COMMON.disableRecipeBatSoup.get();
+        FoodExpansionConfig.disableRecipeGoldenFeast = ConfigHolder.COMMON.disableRecipeGoldenFeast.get();
+        FoodExpansionConfig.disableRecipeChocolateCake = ConfigHolder.COMMON.disableRecipeChocolateCake.get();
+
         FoodExpansionConfig.bowlStackSizeItems = ConfigHolder.COMMON.bowlStackSizeItems.get();
     }
 
