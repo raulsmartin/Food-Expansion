@@ -10,7 +10,7 @@ import net.minecraft.item.ItemStack;
 public class LollipopItem extends BasicFoodItem {
 
     public LollipopItem() {
-        super("lollipop", FoodTypes.LOLLIPOP);
+        super(FoodTypes.LOLLIPOP);
     }
 
     @Override

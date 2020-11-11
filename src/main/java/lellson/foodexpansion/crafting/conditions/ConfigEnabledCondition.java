@@ -18,14 +18,12 @@ public class ConfigEnabledCondition implements ICondition {
     }
 
     @Override
-    public ResourceLocation getID()
-    {
+    public ResourceLocation getID() {
         return NAME;
     }
 
     @Override
-    public boolean test()
-    {
+    public boolean test() {
         try {
             return !FoodExpansionConfig.class.getField(config_key).getBoolean(null);
         } catch (IllegalAccessException | NoSuchFieldException e) {
@@ -35,8 +33,7 @@ public class ConfigEnabledCondition implements ICondition {
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return "config_enabled(\"" + config_key + "\")";
     }
 
@@ -49,14 +46,12 @@ public class ConfigEnabledCondition implements ICondition {
         }
 
         @Override
-        public ConfigEnabledCondition read(JsonObject json)
-        {
+        public ConfigEnabledCondition read(JsonObject json) {
             return new ConfigEnabledCondition(JSONUtils.getString(json, "config_key"));
         }
 
         @Override
-        public ResourceLocation getID()
-        {
+        public ResourceLocation getID() {
             return ConfigEnabledCondition.NAME;
         }
     }

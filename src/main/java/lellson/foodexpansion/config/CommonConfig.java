@@ -45,6 +45,13 @@ final class CommonConfig {
     final ForgeConfigSpec.BooleanValue disableParrotMeatDrop;
     final ForgeConfigSpec.BooleanValue disableLlamaMeatDrop;
     final ForgeConfigSpec.BooleanValue disablePolarBearMeatDrop;
+
+    //NEW FOOD RECIPES
+    final ForgeConfigSpec.BooleanValue disableRecipeVeggieStew;
+    final ForgeConfigSpec.BooleanValue disableRecipeBatSoup;
+    final ForgeConfigSpec.BooleanValue disableRecipeGoldenFeast;
+    final ForgeConfigSpec.BooleanValue disableRecipeChocolateCake;
+
     final ForgeConfigSpec.ConfigValue<List<String>> bowlStackSizeItems;
 
     private static final String DISABLERECIPE_Bacon = "Disable Bacon Recipe";
@@ -86,13 +93,20 @@ final class CommonConfig {
     private static final String DISABLEDROP_ParrotMeatDrop = "If set to true, parrots are not allowed to drop Parrot Meat";
     private static final String DISABLEDROP_LlamaMeatDrop = "If set to true, llamas are not allowed to drop Llama Meat";
     private static final String DISABLEDROP_PolarBearMeatDrop = "If set to true, polar bears are not allowed to drop Polar Bear Meat";
+
+    //NEW FOOD RECIPES
+    private static final String DISABLERECIPE_VeggieStew = "Disable Veggie Stew Recipe";
+    private static final String DISABLERECIPE_BatSoup = "Disable Bat Soup Recipe";
+    private static final String DISABLERECIPE_GoldenFeast = "Disable Golden Feast Recipe";
+    private static final String DISABLERECIPE_ChocolateCake = "Disable Chocolate Cake Recipe";
+
     private static final String STACKSIZE_BowlItems = "Items defined here have their stacksize increased to 64";
 
     CommonConfig(final ForgeConfigSpec.Builder builder) {
         builder.comment("General Settings").push("general");
         bowlStackSizeItems = builder
                 .comment(STACKSIZE_BowlItems)
-                .define("bowlStackSizeItems", Lists.newArrayList("minecraft:mushroom_stew", "minecraft:rabbit_stew", "minecraft:beetroot_soup", "foodexpansion:melon_salad", "foodexpansion:carrot_seed_soup", "foodexpansion:blaze_cream", "foodexpansion:nether_wart_soup", "foodexpansion:spider_soup", "foodexpansion:beetroot_noodles"));
+                .define("bowlStackSizeItems", Lists.newArrayList("minecraft:mushroom_stew", "minecraft:rabbit_stew", "minecraft:beetroot_soup", "foodexpansion:melon_salad", "foodexpansion:carrot_seed_soup", "foodexpansion:blaze_cream", "foodexpansion:nether_wart_soup", "foodexpansion:spider_soup", "foodexpansion:beetroot_noodles", "foodexpansion:veggie_stew", "foodexpansion:bat_soup", "foodexpansion:golden_feast"));
         builder.pop();
 
         builder.comment("Set to true, to disable the Recipes").push("general.disable_recipes");
@@ -189,6 +203,20 @@ final class CommonConfig {
         disableRecipeCookedPolarBearMeat = builder
                 .comment(DISABLERECIPE_CookedPolarBearMeat)
                 .define("disableRecipeCookedPolarBearMeat", false);
+
+        //NEW FOOD RECIPES
+        disableRecipeVeggieStew = builder
+                .comment(DISABLERECIPE_VeggieStew)
+                .define("disableRecipeVeggieStew", false);
+        disableRecipeBatSoup = builder
+                .comment(DISABLERECIPE_BatSoup)
+                .define("disableRecipeBatSoup", false);
+        disableRecipeGoldenFeast = builder
+                .comment(DISABLERECIPE_GoldenFeast)
+                .define("disableRecipeGoldenFeast", false);
+        disableRecipeChocolateCake = builder
+                .comment(DISABLERECIPE_ChocolateCake)
+                .define("disableRecipeChocolateCake", false);
         builder.pop();
 
         builder.comment("Set to true, to disable the Mobdrops").push("disable_mobdrops");

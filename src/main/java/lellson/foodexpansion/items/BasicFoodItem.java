@@ -2,34 +2,31 @@ package lellson.foodexpansion.items;
 
 import lellson.foodexpansion.FoodExpansion;
 import lellson.foodexpansion.FoodItems;
-import lellson.foodexpansion.Reference;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import java.util.Objects;
 
 public class BasicFoodItem extends Item {
-    private boolean isSoup;
+    private final boolean isSoup;
 
-    public BasicFoodItem(String name, Food foodType, boolean isSoup) {
+    public BasicFoodItem(Food foodType, boolean isSoup) {
         super(new Item.Properties().food(foodType).group(FoodExpansion.ITEM_GROUP).maxStackSize(isSoup ? 1 : 64));
-        setRegistryName(new ResourceLocation(Reference.MODID, name));
         this.isSoup = isSoup;
-        FoodItems.ITEM_LIST.add(this);
     }
-    public BasicFoodItem(String name, Food foodType) {
-        this(name, foodType, false);
+
+    public BasicFoodItem(Food foodType) {
+        this(foodType, false);
     }
 
     @Override
     public int getUseDuration(ItemStack stack) {
-        if (Objects.requireNonNull(stack.getItem()).equals(FoodItems.jelly)) {
+        if (Objects.requireNonNull(stack.getItem()).equals(FoodItems.JELLY.get())) {
             return 64;
         } else {
             return super.getUseDuration(stack);
