@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:bowl"
+    },
+    {
+      "item": "minecraft:glistering_melon_slice"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    }
+  ],
+  "result": {
+    "item": "foodexpansion:golden_feast"
+  },
+  "conditions": [
+    {
+      "type": "foodexpansion:config_enabled",
+      "config_key": "disableRecipeGoldenFeast"
+    }
+  ]
+}
