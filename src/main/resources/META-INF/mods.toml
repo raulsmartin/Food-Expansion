@@ -1,7 +1,8 @@
 modLoader="javafml"
-loaderVersion="[34,)"
+loaderVersion="[38,)"
 license="All Rights Reserved"
 issueTrackerURL="https://github.com/raulsmartin/Food-Expansion/issues"
+showAsResourcePack=false
 
 [[mods]]
     modId="foodexpansion"
@@ -16,13 +17,13 @@ issueTrackerURL="https://github.com/raulsmartin/Food-Expansion/issues"
     [[dependencies.foodexpansion]]
         modId="forge"
         mandatory=true
-        versionRange="[34,)"
+        versionRange="[38,)"
         ordering="NONE"
         side="BOTH"
 
     [[dependencies.foodexpansion]]
         modId="minecraft"
         mandatory=true
-        versionRange="[1.16.3]"
+        versionRange="[1.18,1.19)"
         ordering="NONE"
         side="BOTH"

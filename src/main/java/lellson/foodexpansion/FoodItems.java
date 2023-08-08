@@ -4,11 +4,11 @@ import lellson.foodexpansion.items.BasicFoodItem;
 import lellson.foodexpansion.items.ForbiddenFruitItem;
 import lellson.foodexpansion.items.LollipopItem;
 import lellson.foodexpansion.items.NetherWartSoupItem;
-import net.minecraft.item.Item;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.RegistryObject;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import org.apache.logging.log4j.LogManager;
 
 public class FoodItems {
@@ -36,7 +36,7 @@ public class FoodItems {
     public static final RegistryObject<Item> BLAZE_CREAM = ITEMS.register("blaze_cream", () -> new BasicFoodItem(FoodTypes.BLAZE_CREAM, true));
     public static final RegistryObject<Item> MELON_SALAD = ITEMS.register("melon_salad", () -> new BasicFoodItem(FoodTypes.MELON_SALAD, true));
     public static final RegistryObject<Item> ROASTED_SEED = ITEMS.register("roasted_seed", () -> new BasicFoodItem(FoodTypes.ROASTED_SEED));
-    public static final RegistryObject<Item> DOUGH = ITEMS.register("dough", () -> new Item(new Item.Properties().group(FoodExpansion.ITEM_GROUP)));
+    public static final RegistryObject<Item> DOUGH = ITEMS.register("dough", () -> new Item(new Item.Properties().tab(FoodExpansion.ITEM_GROUP)));
     public static final RegistryObject<Item> WOLF_MEAT = ITEMS.register("wolf_meat", () -> new BasicFoodItem(FoodTypes.WOLF_MEAT));
     public static final RegistryObject<Item> COOKED_WOLF_MEAT = ITEMS.register("cooked_wolf_meat", () -> new BasicFoodItem(FoodTypes.COOKED_WOLF_MEAT));
     public static final RegistryObject<Item> OCELOT_MEAT = ITEMS.register("ocelot_meat", () -> new BasicFoodItem(FoodTypes.OCELOT_MEAT));

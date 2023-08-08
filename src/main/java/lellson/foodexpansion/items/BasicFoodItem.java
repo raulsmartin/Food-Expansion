@@ -2,25 +2,26 @@ package lellson.foodexpansion.items;
 
 import lellson.foodexpansion.FoodExpansion;
 import lellson.foodexpansion.FoodItems;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Food;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.world.World;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 public class BasicFoodItem extends Item {
     private final boolean isSoup;
 
-    public BasicFoodItem(Food foodType, boolean isSoup) {
-        super(new Item.Properties().food(foodType).group(FoodExpansion.ITEM_GROUP).maxStackSize(isSoup ? 1 : 64));
+    public BasicFoodItem(FoodProperties foodType, boolean isSoup) {
+        super(new Item.Properties().food(foodType).tab(FoodExpansion.ITEM_GROUP).stacksTo(isSoup ? 1 : 64));
         this.isSoup = isSoup;
     }
 
-    public BasicFoodItem(Food foodType) {
+    public BasicFoodItem(FoodProperties foodType) {
         this(foodType, false);
     }
 
@@ -34,10 +35,10 @@ public class BasicFoodItem extends Item {
     }
 
     @Override
-    public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        ItemStack item = super.onItemUseFinish(stack, worldIn, entityLiving);
+    public @NotNull ItemStack finishUsingItem(@NotNull ItemStack stack, @NotNull Level worldIn, @NotNull LivingEntity entityLiving) {
+        ItemStack item = super.finishUsingItem(stack, worldIn, entityLiving);
         if (isSoup) {
-            if (!(entityLiving instanceof PlayerEntity) || !((PlayerEntity) entityLiving).abilities.isCreativeMode) {
+            if (!(entityLiving instanceof Player) || !((Player) entityLiving).isCreative()) {
                 return new ItemStack(Items.BOWL);
             }
         }
