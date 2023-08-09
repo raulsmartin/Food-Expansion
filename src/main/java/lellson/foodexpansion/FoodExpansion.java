@@ -102,7 +102,7 @@ public class FoodExpansion {
                             // Set icon of creative tab
                             .icon(() -> new ItemStack(FoodItems.BACON_AND_EGG.get()))
                             // Add default items to tab
-                            .displayItems((flag, output, param) -> {
+                            .displayItems((params, output) -> {
                                 FoodItems.ITEMS.getEntries().forEach(item -> output.accept(new ItemStack(item.get())));
                                 FoodBlocks.BLOCKS.getEntries().forEach(block -> output.accept(new ItemStack(block.get())));
                             })
