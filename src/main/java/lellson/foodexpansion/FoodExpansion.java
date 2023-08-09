@@ -15,10 +15,8 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -30,11 +28,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.minecraftforge.registries.RegisterEvent;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 @Mod(Reference.MODID)
 public class FoodExpansion {
@@ -94,13 +91,9 @@ public class FoodExpansion {
         }
 
         @SubscribeEvent
-        public static void registerItems(final RegistryEvent.Register<Item> event) {
-            FoodBlocks.BLOCKS.getEntries().stream().map(RegistryObject::get).forEach(block -> event.getRegistry().register(new BlockItem(block, new Item.Properties().tab(ITEM_GROUP)).setRegistryName(Objects.requireNonNull(block.getRegistryName()))));
-        }
-
-        @SubscribeEvent
-        public static void registerRecipeSerializers(final RegistryEvent.Register<RecipeSerializer<?>> event) {
-            CraftingHelper.register(ConfigEnabledCondition.Serializer.INSTANCE);
+        public static void register(final RegisterEvent event) {
+            event.register(ForgeRegistries.Keys.ITEMS, helper -> FoodBlocks.BLOCKS.getEntries().forEach(block -> helper.register(block.getId(), new BlockItem(block.get(), new Item.Properties()))));
+            event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> CraftingHelper.register(ConfigEnabledCondition.Serializer.INSTANCE));
         }
     }
 
@@ -109,10 +102,10 @@ public class FoodExpansion {
 
         @SubscribeEvent
         public static void onLivingDrops(final LivingDropsEvent event) {
-            if (!event.getEntityLiving().isBaby()) {
+            if (!event.getEntity().isBaby()) {
                 for (Class<?> entityClass : DROP_LIST.keySet()) {
-                    if (entityClass.isInstance(event.getEntityLiving())) {
-                        ItemEntity item = DROP_LIST.get(entityClass).getDrop(event.getEntityLiving());
+                    if (entityClass.isInstance(event.getEntity())) {
+                        ItemEntity item = DROP_LIST.get(entityClass).getDrop(event.getEntity());
                         if (item != null) {
                             event.getDrops().add(item);
                         }
@@ -124,8 +117,7 @@ public class FoodExpansion {
 
         @SubscribeEvent
         public static void onLivingEntityUseItem(LivingEntityUseItemEvent.Finish event) {
-            if (event.getEntityLiving() instanceof Player player) {
-
+            if (event.getEntity() instanceof Player player) {
                 if (isBowl(event.getItem().getItem()) && !player.isCreative()) {
                     ItemStack result = event.getResultStack().copy();
                     ItemStack itemStack = event.getItem().copy();

@@ -1,7 +1,8 @@
 {
     "pack": {
         "description": "Food Expansion: Reimagined resources",
-        "pack_format": 8,
-        "_comment": "A pack_format of 8 requires some changes from 1.18.1. Note: we require v8 pack meta for all mods."
+        "pack_format": 9,
+        "forge:resource_pack_format": 9,
+        "forge:data_pack_format": 10
     }
 }

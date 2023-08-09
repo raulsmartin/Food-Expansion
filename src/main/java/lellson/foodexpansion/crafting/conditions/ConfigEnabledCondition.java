@@ -6,7 +6,6 @@ import lellson.foodexpansion.Reference;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
-import net.minecraftforge.common.util.JsonUtils;
 import org.apache.logging.log4j.LogManager;
 
 public class ConfigEnabledCondition implements ICondition {
@@ -23,7 +22,7 @@ public class ConfigEnabledCondition implements ICondition {
     }
 
     @Override
-    public boolean test() {
+    public boolean test(IContext context) {
         try {
             return !FoodExpansionConfig.class.getField(config_key).getBoolean(null);
         } catch (IllegalAccessException | NoSuchFieldException e) {
