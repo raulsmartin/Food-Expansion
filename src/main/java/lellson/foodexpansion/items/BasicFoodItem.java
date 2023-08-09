@@ -17,7 +17,7 @@ public class BasicFoodItem extends Item {
     private final boolean isSoup;
 
     public BasicFoodItem(FoodProperties foodType, boolean isSoup) {
-        super(new Item.Properties().food(foodType).tab(FoodExpansion.ITEM_GROUP).stacksTo(isSoup ? 1 : 64));
+        super(new Item.Properties().food(foodType).stacksTo(isSoup ? 1 : 64));
         this.isSoup = isSoup;
     }
 

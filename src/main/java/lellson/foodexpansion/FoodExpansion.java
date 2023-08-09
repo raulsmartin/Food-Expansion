@@ -3,6 +3,7 @@ package lellson.foodexpansion;
 import lellson.foodexpansion.config.ConfigHelper;
 import lellson.foodexpansion.config.ConfigHolder;
 import lellson.foodexpansion.crafting.conditions.ConfigEnabledCondition;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ambient.Bat;
@@ -11,12 +12,10 @@ import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -31,11 +30,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegisterEvent;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Mod(Reference.MODID)
 public class FoodExpansion {
-    public static final CreativeModeTab ITEM_GROUP = new FoodExpansionItemGroup();
     public static final Map<Class<?>, Drop> DROP_LIST = new HashMap<>();
 
     public static FoodExpansion instance;
@@ -94,6 +93,20 @@ public class FoodExpansion {
         public static void register(final RegisterEvent event) {
             event.register(ForgeRegistries.Keys.ITEMS, helper -> FoodBlocks.BLOCKS.getEntries().forEach(block -> helper.register(block.getId(), new BlockItem(block.get(), new Item.Properties()))));
             event.register(ForgeRegistries.Keys.RECIPE_SERIALIZERS, helper -> CraftingHelper.register(ConfigEnabledCondition.Serializer.INSTANCE));
+        }
+        @SubscribeEvent
+        public static void registerTab(final CreativeModeTabEvent.Register event) {
+            event.registerCreativeModeTab(new ResourceLocation(Reference.MODID, "foodexpansion_tab"), List.of(), List.of(CreativeModeTabs.FOOD_AND_DRINKS), builder ->
+                    // Set name of tab to display
+                    builder.title(Component.translatable("itemGroup.foodexpansion_tab"))
+                            // Set icon of creative tab
+                            .icon(() -> new ItemStack(FoodItems.BACON_AND_EGG.get()))
+                            // Add default items to tab
+                            .displayItems((flag, output, param) -> {
+                                FoodItems.ITEMS.getEntries().forEach(item -> output.accept(new ItemStack(item.get())));
+                                FoodBlocks.BLOCKS.getEntries().forEach(block -> output.accept(new ItemStack(block.get())));
+                            })
+            );
         }
     }
 

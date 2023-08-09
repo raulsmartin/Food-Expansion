@@ -18,7 +18,7 @@ public class ForbiddenFruitItem extends Item {
     private final boolean beneficial;
 
     public ForbiddenFruitItem(boolean beneficial) {
-        super(new Item.Properties().stacksTo(1).tab(FoodExpansion.ITEM_GROUP));
+        super(new Item.Properties().stacksTo(1));
         this.beneficial = beneficial;
     }
 
